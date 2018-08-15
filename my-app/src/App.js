@@ -68,20 +68,20 @@ class Toggle extends React.Component {
   }
 }
 
-function UserInteractiveHeader(props) {
+function EvilHeader(props) {
   return <Header as='h1'>I just want to watch the world burn!</Header>;
 }
 
-function GuestInteractiveHeader(props) {
+function GoodHeader(props) {
   return <Header as='h1'>Hello, world!</Header>;
 }
 
 function InteractiveHeader(props) {
   const isToggleOn = props.isToggleOn;
   if (isToggleOn) {
-    return <UserInteractiveHeader />;
+    return <EvilHeader />;
   }
-  return <GuestInteractiveHeader />;
+  return <GoodHeader />;
 }
 
 function GoodButton(props) {
