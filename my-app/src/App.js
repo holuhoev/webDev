@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import '../src/semantic/dist/semantic.css';
-import { Header, List, Button } from 'semantic-ui-react';
+import { Header, List, Button, Container } from 'semantic-ui-react';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -36,29 +36,74 @@ class Clock extends React.Component {
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggleOn: true};
-
-    this.handleClick = this.handleClick.bind(this);
+    this.handleGoodClick = this.handleGoodClick.bind(this);
+    this.handleEvilClick = this.handleEvilClick.bind(this);
+    this.state = {isToggleOn: false};
   }
 
-  handleClick() {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
+  handleGoodClick() {
+    this.setState({isToggleOn: true});
   }
 
-  render () {
-    return(
-      <Button onClick={this.handleClick}>{this.state.isToggleOn ? 'ON': 'OFF'}</Button>
+  handleEvilClick() {
+    this.setState({isToggleOn: false});
+  }
+
+  render() {
+    const isToggleOn = this.state.isToggleOn;
+    let button;
+
+    if (isToggleOn) {
+      button = <EvilButton onClick={this.handleEvilClick} />;
+    } else {
+      button = <GoodButton onClick={this.handleGoodClick} />;
+    }
+
+    return (
+      <Container>
+        <InteractiveHeader isToggleOn={isToggleOn} />
+        {button}
+      </Container>
     );
   }
 }
 
+function UserInteractiveHeader(props) {
+  return <Header as='h1'>I just want to watch the world burn!</Header>;
+}
+
+function GuestInteractiveHeader(props) {
+  return <Header as='h1'>Hello, world!</Header>;
+}
+
+function InteractiveHeader(props) {
+  const isToggleOn = props.isToggleOn;
+  if (isToggleOn) {
+    return <UserInteractiveHeader />;
+  }
+  return <GuestInteractiveHeader />;
+}
+
+function GoodButton(props) {
+  return (
+    <Button onClick={props.onClick}>
+      Good
+    </Button>
+  );
+}
+
+function EvilButton(props) {
+  return (
+    <Button onClick={props.onClick}>
+      Evil
+    </Button>
+  );
+}
+
 const ListExampleOrderedSimple = () => (
   <div className="App">
-  <Header as='h1'>Hello, world!</Header>
+  <Toggle />
   <Header as='h2'>It is <Clock />.</Header>
-  
   <List as='ol'>
     <List.Item as='li'>Signing Up</List.Item>
     <List.Item as='li'>User Benefits</List.Item>
@@ -72,7 +117,6 @@ const ListExampleOrderedSimple = () => (
     </List.Item>
     <List.Item as='li'>Semantic UI React looks neat!</List.Item>
   </List>
-  <Toggle />
   </div>
 )
 
