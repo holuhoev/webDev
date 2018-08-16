@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import '../src/semantic/dist/semantic.css';
-import { Header, List, Button, Container } from 'semantic-ui-react';
+import { Header, List, Button, Container , Form} from 'semantic-ui-react';
 
 class Clock extends React.Component {
   constructor(props) {
@@ -100,23 +100,91 @@ function EvilButton(props) {
   );
 }
 
+function OutputList(props) {
+  const items = props.items;
+  const listItems = items.map((item) => <List.Item as='li' key={item.toString()}>{item}</List.Item>);
+
+  return (
+    <List as='ol'>{listItems}</List>
+  );
+}
+
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ""};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({value: e.target.value});
+  }
+
+  handleSubmit(e) {
+    alert('A name was submitted: ' + this.state.value);
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Field>
+          <label>Name :</label>
+          <input placeholder='Name' type='text' value={this.state.value} onChange={this.handleChange}></input>
+        </Form.Field>
+        <Button type='submit'>Submit</Button>
+      </Form>
+    );
+  }
+}
+
+class FlavorForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: 'Coconut'};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({value: e.target.value});
+  }
+
+  handleSubmit(e) {
+    alert('Your favorite flavor is: ' + this.state.value);
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Field>
+          <label>Pick your favorite flavor:</label>
+          <select onChange={this.handleChange} value={this.state.value}>
+            <option value="Grapefruit">Grapefruit</option>
+            <option value="Lime">Lime</option>
+            <option value="Coconut">Coconut</option>
+            <option value="Mango">Mango</option>
+          </select>
+        </Form.Field>
+        <Button type='submit'>Submit</Button>
+      </Form>
+    );
+  }
+}
+
+const listItemsRaw = ['Sign up', 'User Benefits', 'Admin', 'Power User', 'Regular User'];
+
 const ListExampleOrderedSimple = () => (
   <div className="App">
-  <Toggle />
-  <Header as='h2'>It is <Clock />.</Header>
-  <List as='ol'>
-    <List.Item as='li'>Signing Up</List.Item>
-    <List.Item as='li'>User Benefits</List.Item>
-    <List.Item as='li'>
-      User Types
-      <List.List as='ol'>
-        <List.Item as='li'>Admin</List.Item>
-        <List.Item as='li'>Power User</List.Item>
-        <List.Item as='li'>Regular User</List.Item>
-      </List.List>
-    </List.Item>
-    <List.Item as='li'>Semantic UI React looks neat!</List.Item>
-  </List>
+    <Toggle />
+    <Header as='h2'>It is <Clock />.</Header>
+    <OutputList items={listItemsRaw} />
+    <NameForm />
+    <FlavorForm />
   </div>
 )
 
