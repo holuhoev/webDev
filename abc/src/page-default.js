@@ -8,33 +8,13 @@ class MenuHeaderSticky extends React.Component {
     super(props);
 
     this.state = {activeItem: ''};
-    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-  }
-
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside);
-  }
-
-  setWrapperRef(node) {
-    this.wrapperRef = node;
   }
 
   handleOnClick(e, { name }) {
     this.setState(
       {activeItem: name}
     );
-  }
-
-  handleClickOutside(e) {
-    if (this.wrapperRef && !this.wrapperRef.contains(e.target.value)) {
-      alert("You clicked outside of me!");
-    }
   }
 
   render() {
@@ -48,7 +28,6 @@ class MenuHeaderSticky extends React.Component {
             name='placeHolder1'
             active={activeItem === 'placeHolder1'}
             onClick={this.handleOnClick}
-            ref={this.setWrapperRef}
           />
           <Menu.Item
             name='placeHolder2'
@@ -76,39 +55,6 @@ class MenuHeaderSticky extends React.Component {
         
       </Sticky>
     );
-  }
-}
-
-class OutsideDisableState extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.setWrapperRef = this.setWrapperRef.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-  }
-
-  componentDidMount() {
-    document.addEventListener('mousedown', this.handleClickOutside)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('mousedown', this.handleClickOutside)
-  }
-
-  setWrapperRef(node) {
-    this.setWrapperRef = node;
-  }
-
-  handleClickOutside(e) {
-    if (this.setWrapperRef && !this.setWrapperRef.contains(e.target)) {
-      
-    }
-  }
-
-  render() {
-    return (
-      <div ref={this.setWrapperRef}>{this.props.children}></div>
-    )
   }
 }
 
