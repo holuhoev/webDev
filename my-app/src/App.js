@@ -246,11 +246,6 @@ class TemperatureInput extends React.Component {
   }
 }
 
-const scaleNames = {
-  c: 'celcius',
-  f: 'fahrenheit'
-}
-
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
@@ -463,6 +458,10 @@ class FilterableProductTable extends React.Component {
   }
 }
 
+const scaleNames = {
+  c: 'celcius',
+  f: 'fahrenheit'
+}
 const PRODUCTS = [
   {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
   {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
@@ -472,8 +471,6 @@ const PRODUCTS = [
   {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
 const listItemsRaw = ['Sign up', 'User Benefits', 'Admin', 'Power User', 'Regular User'];
-
-
 
 const ListExampleOrderedSimple = () => (
   <div className="App">
