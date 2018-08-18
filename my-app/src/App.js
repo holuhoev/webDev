@@ -33,6 +33,8 @@ class Clock extends React.Component {
   }
 }
 
+
+
 class Toggle extends React.Component {
   constructor(props) {
     super(props);
@@ -109,6 +111,8 @@ function OutputList(props) {
   );
 }
 
+
+
 class NameForm extends React.Component {
   constructor(props) {
     super(props);
@@ -175,6 +179,8 @@ class FlavorForm extends React.Component {
     );
   }
 }
+
+
 
 function BoilingVerdict(props) {
   if (props.celcius >= 100) {
@@ -278,6 +284,8 @@ class Calculator extends React.Component {
   }
 }
 
+
+
 function FancyBorder(props) {
   return (
     <div className={"FancyBorder FancyBorder-" + props.color}>
@@ -295,6 +303,8 @@ function WelcomeDialog() {
     </FancyBorder>
   );
 }
+
+
 
 class ProductCategoryRow extends React.Component {
   render() {
@@ -461,8 +471,9 @@ const PRODUCTS = [
   {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
   {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
-
 const listItemsRaw = ['Sign up', 'User Benefits', 'Admin', 'Power User', 'Regular User'];
+
+
 
 const ListExampleOrderedSimple = () => (
   <div className="App">
