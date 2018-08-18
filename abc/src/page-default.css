@@ -1,7 +1,12 @@
-.container-wrapper {
-  text-align: center;
-}
-
 .ui.menu {
   border-radius: 0!important;
+}
+
+.menu-sidebar-dropright {
+  height: 100vh;
+}
+
+.btn-toggle-sidebar {
+  margin-top: 10px!important;
+  margin-left: 10px!important;
 }
