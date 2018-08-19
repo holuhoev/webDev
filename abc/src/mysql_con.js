@@ -11,9 +11,15 @@ var con = mysql.createConnection(
 
 con.connect();
 
-var result = con.query("SELEC * FROM data", function(err, result) {
-    if (err) {
-        console.error(err);
-        return;
-    }
-})
+function FetchData() {
+    var result = con.query("SELECT * FROM data", function(err, result) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+    });
+
+    return result;
+}
+
+export function FetchData;

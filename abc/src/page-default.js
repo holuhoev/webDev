@@ -1,10 +1,10 @@
 import React from 'react';
-import result from './mysql_con';
+import FetchData from './mysql_con';
 import './page-default.css';
 import '../src/semantic/dist/semantic.css';
 import { Menu, Sticky, Table, Icon, Segment, Sidebar, Button } from 'semantic-ui-react';
 
-console.log(result);
+
 
 class MenuHeaderSticky extends React.Component {
   constructor(props) {
