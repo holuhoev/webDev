@@ -1,7 +1,10 @@
 import React from 'react';
+import result from './mysql_con';
 import './page-default.css';
 import '../src/semantic/dist/semantic.css';
 import { Menu, Sticky, Table, Icon, Segment, Sidebar, Button } from 'semantic-ui-react';
+
+console.log(result);
 
 class MenuHeaderSticky extends React.Component {
   constructor(props) {
@@ -22,7 +25,7 @@ class MenuHeaderSticky extends React.Component {
 
     return(
       <Sticky>
-        <Menu>
+        <Menu style={{ height: '80px' }}>
           <Menu.Item header>Logo Placeholder</Menu.Item>
           <Menu.Item
             name='placeHolder1'
@@ -56,9 +59,10 @@ class MenuHeaderSticky extends React.Component {
       </Sticky>
     );
   }
-}
+};
 
 class ClientBaseTable extends React.Component {
+
   render() {
     return(
       <div className='client-base-table'>
@@ -78,36 +82,7 @@ class ClientBaseTable extends React.Component {
               <Table.HeaderCell>Price</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
-
-         <Table.Body>
-            <Table.Row>
-              <Table.Cell>1</Table.Cell>
-              <Table.Cell>John Doe</Table.Cell>
-              <Table.Cell>237  School House Road, Bay Springs, MS, Mississippi</Table.Cell>
-              <Table.Cell>601-764-0848</Table.Cell>
-              <Table.Cell>john.doe@mail.com</Table.Cell>
-              <Table.Cell>39422</Table.Cell>
-              <Table.Cell>15933</Table.Cell>
-              <Table.Cell>2012</Table.Cell>
-              <Table.Cell>Tesla</Table.Cell>
-              <Table.Cell>Model 5</Table.Cell>
-              <Table.Cell>$2500</Table.Cell>
-            </Table.Row>
-
-            <Table.Row>
-              <Table.Cell>1</Table.Cell>
-              <Table.Cell>John Doe</Table.Cell>
-              <Table.Cell>237  School House Road, Bay Springs, MS, Mississippi</Table.Cell>
-              <Table.Cell>601-764-0848</Table.Cell>
-              <Table.Cell>john.doe@mail.com</Table.Cell>
-              <Table.Cell>39422</Table.Cell>
-              <Table.Cell>15933</Table.Cell>
-              <Table.Cell>2012</Table.Cell>
-              <Table.Cell>Tesla</Table.Cell>
-              <Table.Cell>Model 5</Table.Cell>
-              <Table.Cell>$2500</Table.Cell>
-            </Table.Row>
-
+          <Table.Body>
             <Table.Row>
               <Table.Cell>1</Table.Cell>
               <Table.Cell>John Doe</Table.Cell>
