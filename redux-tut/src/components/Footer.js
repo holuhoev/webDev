@@ -2,7 +2,7 @@ import React from 'react'
 import FilterLink from '../containers/FilterLink'
 import { VisibilityFilters } from '../actions'
 
-const Footer = () => {
+const Footer = () => (
     <div>
         <span>Show: </span>
         <FilterLink filter={VisibilityFilters.SHOW_ALL}>
@@ -15,6 +15,6 @@ const Footer = () => {
             Completed
         </FilterLink>
     </div>
-}
+)
 
 export default Footer
