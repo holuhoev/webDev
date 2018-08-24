@@ -1,28 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom'
-
 import './styles/style.css'
 
-import App from './components/App'
-import Single from './components/Single'
-import PhotoGrid from './components/PhotoGrid'
-
-import { Switch, Route, Router } from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom'
+import { Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
-import store, { historySync } from './store'
+import App from './components/App'
+
+import store from './store'
+import history from './history'
 
 import registerServiceWorker from './registerServiceWorker'
 
+import Raven from 'raven-js'
+import { sentry_url } from './config'
+
+Raven.config(sentry_url).install()
+
 const router = (
     <Provider store={store}>
-        <Router history={historySync}>
-            <App>
-                <Switch>
-                    <Route exact path="/" render={ () => <PhotoGrid />} />
-                    <Route path="/view/:viewId" render={ () => <Single />} />
-                </Switch>
-            </App>
+        <Router history={history}>
+            <App />
         </Router>    
     </Provider>
 )

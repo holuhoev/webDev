@@ -1,17 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Switch, Route} from 'react-router-dom'
 
-/* {this.props.children} in populated by react-router itself.
-the argument this.props passes anything from parents either to PhotoGrid or Single */
-export default class Main extends React.Component {
+import PhotoGrid from './PhotoGrid'
+import Single from './Single'
+
+/* Haven't thought about a better solution rather than using a { Switch } wrapper */
+const FadingSwitch = ({ ...rest }) => (
+    <Switch {...rest}>
+        <Route exact path="/" render={props => <PhotoGrid {...props} {...rest} />} />
+        <Route path="/view/:postId" render={({ match }) => <Single {...match} {...rest} />} />
+    </Switch>
+)
+
+class Main extends React.Component {
     render() {
+        const props = this.props
+
         return (
             <div>
                 <h1>
                     <Link to="/">Reduxstagram</Link>
                 </h1>
-                {React.cloneElement(this.props.children, this.props)}
+                <FadingSwitch {...props} />
             </div>
         )
     }
 }
+
+export default Main

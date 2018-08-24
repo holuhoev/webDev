@@ -1,4 +1,4 @@
-import mysql from 'mysql';
+/* import mysql from 'mysql';
 
 var con = mysql.createConnection(
     {
@@ -22,4 +22,4 @@ function FetchData() {
     return result;
 }
 
-export function FetchData;
+export default FetchData */
