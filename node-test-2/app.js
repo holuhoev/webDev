@@ -4,10 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// db connection
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('localhost:27017/node-test-2');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// db init
+app.use(function(req, res, next) {
+  req.db = db;
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

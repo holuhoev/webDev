@@ -1,2 +1,4 @@
 node-test/data/WiredTiger.lock
 node-test/data/mongod.lock
+node-test-2/data/WiredTiger.lock
+node-test-2/data/mongod.lock
