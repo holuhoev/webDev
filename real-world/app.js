@@ -7,7 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var User = require('./models/User');
+require('./models/User');
+require('./config/passport')
 
 var app = express();
 

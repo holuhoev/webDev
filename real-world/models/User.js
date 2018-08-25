@@ -31,13 +31,13 @@ var UserSchema = new mongoose.Schema(
     }
 );
 
-UserSchema.methods.encryptPassword = function(pwd) {
+UserSchema.methods.encryptPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(pwd, this.salt, 10e5, 2**9, 'sha512').toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 10e5, 2**9, 'sha512').toString('hex');
 };
 
-UserSchema.method.validatePassword = function(pwd) {
-    var hash = crypto.pbkdf2Sync(pwd, this.salt, 10e5, 2**9, 'sha512').toString('hex');
+UserSchema.method.validatePassword = function(password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 10e5, 2**9, 'sha512').toString('hex');
     return this.hash === hash;
 };
 
