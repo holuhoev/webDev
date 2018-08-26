@@ -3,11 +3,30 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+
+// db file
+var DB = require('./data/db');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+// db connection
+mongoose.connect(DB.db).then(
+  () => { console.log('connected to db') },
+  err => { console.log('not connected to db: ' + err) }
+);
+
+app.use(cors());
+app.user(bodyParser.urlencoded({ extended: true }));
+app.user(bodyParser.json());
+
+app.listen(PORT, () => {
+  console.log('server is running on port: ', PORT);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
