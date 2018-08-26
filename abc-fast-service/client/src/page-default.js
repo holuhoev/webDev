@@ -1,11 +1,17 @@
 import React from 'react';
 import './page-default.css';
+import 'react-table/react-table.css';
+
 import '../src/semantic/dist/semantic.css';
-import { Menu, Sticky, Table, Icon, Segment, Sidebar, Button } from 'semantic-ui-react';
+import { Menu, Sticky, Icon, Segment, Sidebar, Button } from 'semantic-ui-react';
+
+import ReactTable from 'react-table';
+import { makeData } from './data-example/data';
+import Headers from './data-example/headers';
 
 // async actions
 import axios from 'axios';
-import DATA from './data'
+import DATA from './data';
 
 class MenuHeaderSticky extends React.Component {
   constructor(props) {
@@ -64,63 +70,49 @@ class MenuHeaderSticky extends React.Component {
 
 // ClientBaseTable goes to MenuSidebarHoverLeft
 class ClientBaseTable extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
-    this.state = '';
+    this.state = {
+      data: makeData(),
+      serverData: ''
+    };
+
+    this.fetchClientData = this.fetchClientData.bind(this);
   };
 
-  componentDidMount() {
+  fetchClientData() {
     axios.get(DATA.data)
     .then(response => {
-      this.setState(response.data);
-      console.log(this.state);
+      this.setState(prevState => ({ serverData: response }));
     }).catch(function (error) {
-      console.log(error);
     });
   };
 
 
 
   render() {
+
+    const { data } = this.state;
+    
+    // table content from server TODO
+
     return(
-      <div className='client-base-table'>
-        <Table singleLine celled selectable inverted>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>ID</Table.HeaderCell>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Adress</Table.HeaderCell>
-              <Table.HeaderCell>Phone</Table.HeaderCell>
-              <Table.HeaderCell>Email</Table.HeaderCell>
-              <Table.HeaderCell>ZIP from</Table.HeaderCell>
-              <Table.HeaderCell>ZIP to</Table.HeaderCell>
-              <Table.HeaderCell>Vehicle Year</Table.HeaderCell>
-              <Table.HeaderCell>Vehicle Make</Table.HeaderCell>
-              <Table.HeaderCell>Vehicle Model</Table.HeaderCell>
-              <Table.HeaderCell>Price</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row>
-              <Table.Cell>1</Table.Cell>
-              <Table.Cell>John Doe</Table.Cell>
-              <Table.Cell>237  School House Road, Bay Springs, MS, Mississippi</Table.Cell>
-              <Table.Cell>601-764-0848</Table.Cell>
-              <Table.Cell>john.doe@mail.com</Table.Cell>
-              <Table.Cell>39422</Table.Cell>
-              <Table.Cell>15933</Table.Cell>
-              <Table.Cell>2012</Table.Cell>
-              <Table.Cell>Tesla</Table.Cell>
-              <Table.Cell>Model 5</Table.Cell>
-              <Table.Cell>$2500</Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
+      <div className='client-database-table'>
+        <ReactTable
+          data={ data }
+          columns={ Headers }
+          defaultPageSize={ 10 }
+          className="-striped -highlight"
+        />
+        
+        <div className='tip-client-database-table' style={{'textAlign': 'right'}}>
+          <em> Tip: Hold shift when sorting to multi-sort! </em>
+        </div>
       </div>
     );
-  }
-}
+  };
+};
 
 class MenuSidebarHoverLeft extends React.Component {
   constructor(props) {
