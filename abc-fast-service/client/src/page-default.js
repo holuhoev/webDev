@@ -9,7 +9,6 @@ import ReactTable from 'react-table';
 import { makeData } from './data-example/data';
 import Headers from './data-example/headers';
 
-// async actions
 import axios from 'axios';
 import DATA from './data';
 
@@ -70,18 +69,16 @@ class MenuHeaderSticky extends React.Component {
 
 // ClientBaseTable goes to MenuSidebarHoverLeft
 class ClientBaseTable extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       data: makeData(),
       serverData: ''
     };
-
-    this.fetchClientData = this.fetchClientData.bind(this);
   };
 
-  fetchClientData() {
+  componentDidMount() {
     axios.get(DATA.data)
     .then(response => {
       this.setState(prevState => ({ serverData: response }));
@@ -89,14 +86,14 @@ class ClientBaseTable extends React.Component {
     });
   };
 
-
-
   render() {
-
     const { data } = this.state;
-    
-    // table content from server TODO
+    const { serverData } = this.state;
 
+    console.log(serverData);
+    console.log(serverData.data);
+    // table content from server TODO
+    
     return(
       <div className='client-database-table'>
         <ReactTable
