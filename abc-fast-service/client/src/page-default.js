@@ -1,10 +1,11 @@
 import React from 'react';
-import FetchData from './mysql_con';
 import './page-default.css';
 import '../src/semantic/dist/semantic.css';
 import { Menu, Sticky, Table, Icon, Segment, Sidebar, Button } from 'semantic-ui-react';
 
-
+// async actions
+import axios from 'axios';
+import DATA from './data'
 
 class MenuHeaderSticky extends React.Component {
   constructor(props) {
@@ -61,8 +62,25 @@ class MenuHeaderSticky extends React.Component {
   }
 };
 
-// ClientBaseTable goes to MenuSidebarHoverLeft`
+// ClientBaseTable goes to MenuSidebarHoverLeft
 class ClientBaseTable extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { "JSON-data": []};
+  };
+
+  componentDidMount() {
+    axios.get(DATA.data)
+    .then(response => {
+      this.setState({ "JSON-data": response.data });
+      console.log(this.state);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  };
+
+
 
   render() {
     return(
