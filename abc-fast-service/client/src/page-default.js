@@ -67,13 +67,13 @@ class ClientBaseTable extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { "JSON-data": []};
+    this.state = '';
   };
 
   componentDidMount() {
     axios.get(DATA.data)
     .then(response => {
-      this.setState({ "JSON-data": response.data });
+      this.setState(response.data);
       console.log(this.state);
     }).catch(function (error) {
       console.log(error);
