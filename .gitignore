@@ -6,3 +6,4 @@ node-test-2/data/mongod.lock
 
 abc-fast-service/server/data/WiredTiger.lock
 abc-fast-service/server/data/mongod.lock
+abc-fast-service/server/data/mongod.lock
