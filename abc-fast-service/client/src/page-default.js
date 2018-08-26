@@ -74,14 +74,22 @@ class ClientBaseTable extends React.Component {
 
     this.state = {
       data: makeData(),
-      serverData: ''
+      serverData: []
     };
   };
 
   componentDidMount() {
     axios.get(DATA.data)
     .then(response => {
-      this.setState(prevState => ({ serverData: response }));
+      if (response && response.data ) { 
+        if (Array.isArray(response.data)) {
+           // if array in response.data
+           this.setState(prevState => ({ serverData: repsonse.data }));
+        } else if (response.data.data && Array.isArray(response.data.data)) {
+          //  if array in response.data.data 
+          this.setState(prevState => ({ serverData: repsonse.data.data }));
+        }
+      }
     }).catch(function (error) {
     });
   };
@@ -97,7 +105,7 @@ class ClientBaseTable extends React.Component {
     return(
       <div className='client-database-table'>
         <ReactTable
-          data={ data }
+          data={ serverData }
           columns={ Headers }
           defaultPageSize={ 10 }
           className="-striped -highlight"
